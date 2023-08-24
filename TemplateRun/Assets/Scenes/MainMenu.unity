@@ -1959,7 +1959,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 64309f8b41e04a1459d02ca26b8c9d84, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d320dedc29a14634794982959984734c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3925,7 +3925,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: v0.1.0
+  m_text: v0.2.0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 07ac70104f747e84e871eeab6a92f581, type: 2}
   m_sharedMaterial: {fileID: 266763239750905350, guid: 07ac70104f747e84e871eeab6a92f581, type: 2}
@@ -5941,6 +5941,10 @@ PrefabInstance:
     - target: {fileID: 3710950595918725362, guid: 7dbc203b7eff962439f1bac5135c3d03, type: 3}
       propertyPath: m_Name
       value: PersistentManagers
+      objectReference: {fileID: 0}
+    - target: {fileID: 3710950595918725362, guid: 7dbc203b7eff962439f1bac5135c3d03, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5520564685703362011, guid: 7dbc203b7eff962439f1bac5135c3d03, type: 3}
       propertyPath: m_AnchoredPosition.x
