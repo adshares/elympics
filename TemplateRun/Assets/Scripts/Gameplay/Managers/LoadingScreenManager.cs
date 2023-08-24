@@ -43,6 +43,9 @@ public class LoadingScreenManager : MonoBehaviour
     private float messageTimer;
     private int messageIndex;
     private int bannerIndex;
+    private float bannerStayDuration = 2.5f;
+    private float bannerTimer;
+    private int bannerDisplayedCount;
 
     private void Start()
     {
@@ -88,6 +91,8 @@ public class LoadingScreenManager : MonoBehaviour
         sliderBottomPart.gameObject.SetActive(true);
         sliderTopPart.value = 0.5f;
         sliderBottomPart.value = 0.5f;
+
+        bannerDisplayedCount = 0;
     }
 
     private void DisplayLoadingScreen()
@@ -104,6 +109,7 @@ public class LoadingScreenManager : MonoBehaviour
 
         bannerIndex = Random.Range(0, bannerImageList.Count);
         LoadSponsorImage(bannerIndex);
+        bannerTimer = 0f;
     }
 
     private void ProcessSlide()
@@ -147,6 +153,15 @@ public class LoadingScreenManager : MonoBehaviour
             loadingTransform.localScale = Vector3.one * shadeTimer / shadeDuration;
         }
         else ProcessLoadingMessage();
+
+        if (bannerDisplayedCount < bannerImageList.Count) {
+            bannerTimer += Time.deltaTime;
+            if (bannerTimer > bannerStayDuration) {
+                bannerIndex = (bannerIndex + 1) % bannerImageList.Count;
+                LoadSponsorImage(bannerIndex);
+                bannerTimer = 0f;
+            }
+        }
     }
 
     private void ProcessLoadingMessage()
@@ -167,6 +182,7 @@ public class LoadingScreenManager : MonoBehaviour
                 break;
         }
     }
+
     private void SpawnMessage()
     {
         message.text = messageList[messageIndex];
@@ -189,9 +205,6 @@ public class LoadingScreenManager : MonoBehaviour
         {
             messageTimer = 0;
             messageState = MessageState.Stay;
-
-            bannerIndex = (bannerIndex + 1) % bannerImageList.Count;
-            LoadSponsorImage(bannerIndex);
         }
     }
 
@@ -238,5 +251,6 @@ public class LoadingScreenManager : MonoBehaviour
         }
         bannerImage.GetComponent<RectTransform>().sizeDelta = new Vector2(w, h);
         bannerImage.texture = texture;
+        bannerDisplayedCount++;
     }
 }
