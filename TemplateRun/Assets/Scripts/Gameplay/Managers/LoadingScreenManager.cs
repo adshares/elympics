@@ -29,6 +29,9 @@ public class LoadingScreenManager : MonoBehaviour
     [SerializeField] private float messageSlideDuration;
     [SerializeField] private Vector2 targetMessageOffset;
 
+    [SerializeField] private RawImage bannerImage;
+    [SerializeField] private List<Texture> bannerImageList;
+
     private bool isHidden = true;
     private bool wasHidden = true;
     private bool slideInProgress;
@@ -39,6 +42,7 @@ public class LoadingScreenManager : MonoBehaviour
     private MessageState messageState;
     private float messageTimer;
     private int messageIndex;
+    private int bannerIndex;
 
     private void Start()
     {
@@ -97,6 +101,9 @@ public class LoadingScreenManager : MonoBehaviour
         sliderBottomPart.gameObject.SetActive(true);
         sliderTopPart.value = 0;
         sliderBottomPart.value = 0;
+
+        bannerIndex = Random.Range(0, bannerImageList.Count);
+        LoadSponsorImage(bannerIndex);
     }
 
     private void ProcessSlide()
@@ -182,6 +189,9 @@ public class LoadingScreenManager : MonoBehaviour
         {
             messageTimer = 0;
             messageState = MessageState.Stay;
+
+            bannerIndex = (bannerIndex + 1) % bannerImageList.Count;
+            LoadSponsorImage(bannerIndex);
         }
     }
 
@@ -208,5 +218,25 @@ public class LoadingScreenManager : MonoBehaviour
             messageTimer = 0;
             messageState = MessageState.Hidden;
         }
+    }
+
+    private void LoadSponsorImage(int bannerIndex)
+    {
+        Texture texture = bannerImageList[bannerIndex];
+        int padding = 40;
+        int bW = 1024 - padding;
+        int bH = 720 - padding;
+        float bAspect = (float)bW / bH;
+        int w, h;
+        float aspect = (float)texture.width / texture.height;
+        if (aspect > bAspect) {
+            w = bW;
+            h = (int)((float)texture.height * bW / texture.width);
+        } else {
+            w = (int)((float)texture.width * bH / texture.height);
+            h = bH;
+        }
+        bannerImage.GetComponent<RectTransform>().sizeDelta = new Vector2(w, h);
+        bannerImage.texture = texture;
     }
 }
