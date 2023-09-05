@@ -5977,7 +5977,7 @@ PrefabInstance:
     - target: {fileID: 5520564686786787697, guid: 7dbc203b7eff962439f1bac5135c3d03, type: 3}
       propertyPath: bannerImageList.Array.data[1]
       value: 
-      objectReference: {fileID: 2800000, guid: f0505e230ad821d4f9265362201e5f16, type: 3}
+      objectReference: {fileID: 2800000, guid: baa86a3386de4f640b69fa0c875ea2c9, type: 3}
     - target: {fileID: 5520564687125970589, guid: 7dbc203b7eff962439f1bac5135c3d03, type: 3}
       propertyPath: m_IsActive
       value: 1
